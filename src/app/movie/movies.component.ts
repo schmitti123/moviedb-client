@@ -23,9 +23,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 })
 export class MoviesComponent implements OnInit {
   movies: Movie[];
-  dataChange: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
-  datasource: MoviesDatasource;
-  displayedColumns = ['title', 'genre', 'delete', 'details'];
 
   @ViewChild('filter')
   filter: ElementRef;
@@ -35,11 +32,6 @@ export class MoviesComponent implements OnInit {
 
 
     moviesChangedService.movieChangedHandler().subscribe(movie => this.add(movie));
-
-    this.movieService
-      .getMovies()
-      .then(movies => this.datasource = new MoviesDatasource(movies, this.dataChange));
-
 
   }
 
@@ -51,8 +43,6 @@ export class MoviesComponent implements OnInit {
 
   add(movie: Movie): void {
     this.movies.push(movie);
-    const copiedData = this.movies.slice();
-    this.dataChange.next(copiedData);
 
 
   }
@@ -73,8 +63,6 @@ export class MoviesComponent implements OnInit {
         }
         // const index = this.movies.indexOf(movie);
         this.movies.splice(index, 1);
-        const copiedData = this.movies.slice();
-        this.dataChange.next(copiedData);
 
       });
   }
@@ -85,56 +73,8 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-      .debounceTime(150)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        if (!this.datasource) {
-          return;
-        }
-        this.datasource.filter = this.filter.nativeElement.value;
-      });
   }
 
 
 }
 
-export class MoviesDatasource extends DataSource<Movie> {
-  data: Movie[];
-  dataChange: BehaviorSubject<Movie[]>;
-
-  _filterChange = new BehaviorSubject('');
-
-  get filter(): string {
-    return this._filterChange.value;
-  }
-
-  set filter(filter: string) {
-    this._filterChange.next(filter);
-  }
-
-  constructor(data: Movie[], dataChange: BehaviorSubject<Movie[]>) {
-    super();
-    this.data = data;
-    this.dataChange = dataChange;
-    this.dataChange.next(data);
-  }
-
-  connect(): Observable<Movie[]> {
-    const displayDataChanges = [
-      this.dataChange,
-      this._filterChange,
-    ];
-
-    return Observable.merge(...displayDataChanges).map(() => {
-      return this.dataChange.getValue().slice().filter((item: Movie) => {
-        const searchStr = (item.title + item.genre).toLowerCase();
-        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-      });
-    });
-  }
-
-  disconnect() {
-  }
-
-}

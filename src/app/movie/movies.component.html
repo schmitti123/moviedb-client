@@ -1,40 +1,26 @@
 <app-movie-new></app-movie-new>
 
-<md-form-field floatPlaceholder="never">
-  <input mdInput #filter placeholder="Filter Movies">
-</md-form-field>
-
-<md-table #table [dataSource]="datasource">
-
-  <ng-container mdColumnDef="title">
-    <md-header-cell *mdHeaderCellDef> Title</md-header-cell>
-    <md-cell *mdCellDef="let movie"> {{movie.title}}</md-cell>
-  </ng-container>
+<!--<md-form-field floatPlaceholder="never">-->
+  <!--<input mdInput #filter placeholder="Filter Movies">-->
+<!--</md-form-field>-->
 
 
-  <ng-container mdColumnDef="genre">
-    <md-header-cell *mdHeaderCellDef> Genre</md-header-cell>
-    <md-cell *mdCellDef="let movie"> {{movie.genre}}</md-cell>
-  </ng-container>
+<div class="movie-cards">
+  <md-card class="movie-card" *ngFor="let movie of movies">
+    <md-card-header>
+      <md-card-title>{{movie.title}}</md-card-title>
+      <md-card-subtitle>{{movie.genre}}</md-card-subtitle>
+    </md-card-header>
+    <img *ngIf="movie.imageData" md-card-image src="{{movie.imageData}}">
+    <md-card-content>
+      <p>
+        Blob
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-button (click)="details(movie)">EDIT</button>
+      <button md-button (click)="delete(movie)">DELETE</button>
+    </md-card-actions>
+  </md-card>
 
-  <ng-container mdColumnDef="delete">
-    <md-header-cell *mdHeaderCellDef> Delete</md-header-cell>
-    <md-cell *mdCellDef="let movie">
-      <button md-mini-fab
-              (click)="delete(movie); $event.stopPropagation()">x
-      </button>
-    </md-cell>
-  </ng-container>
-
-  <ng-container mdColumnDef="details">
-    <md-header-cell *mdHeaderCellDef> Details</md-header-cell>
-    <md-cell *mdCellDef="let movie">
-      <button md-mini-fab
-              (click)="details(movie); $event.stopPropagation()">x
-      </button>
-    </md-cell>
-  </ng-container>
-
-  <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-  <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-</md-table>
+</div>
