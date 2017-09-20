@@ -1,5 +1,3 @@
-<!-- <button md-raised-button (click)="gotoNewMovie()">New Movie</button> -->
-
 <app-movie-new></app-movie-new>
 
 <md-form-field floatPlaceholder="never">
@@ -40,20 +38,3 @@
   <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
   <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
 </md-table>
-
-<!--<ul class="movies">-->
-  <!--<li *ngFor="let movie of movies" (click)="onSelect(movie)"-->
-      <!--[class.selected]="movie === selectedMovie">-->
-    <!--<span class="badge">{{movie.title}}</span>-->
-    <!--<span>{{movie.genre}}</span>-->
-    <!--<button md-mini-fab class="delete"-->
-            <!--(click)="delete(movie); $event.stopPropagation()">x-->
-    <!--</button>-->
-  <!--</li>-->
-<!--</ul>-->
-<!--<div *ngIf="selectedMovie">-->
-  <!--<h2>-->
-    <!--{{selectedMovie.title | uppercase}} is my Movie-->
-  <!--</h2>-->
-  <!--<button md-raised-button (click)="gotoDetail()">View Details</button>-->
-<!--</div>-->

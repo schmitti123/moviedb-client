@@ -24,7 +24,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class MoviesComponent implements OnInit {
   movies: Movie[];
   dataChange: BehaviorSubject<Movie[]> = new BehaviorSubject<Movie[]>([]);
-  selectedMovie: Movie;
   datasource: MoviesDatasource;
   displayedColumns = ['title', 'genre', 'delete', 'details'];
 
@@ -95,18 +94,6 @@ export class MoviesComponent implements OnInit {
         }
         this.datasource.filter = this.filter.nativeElement.value;
       });
-  }
-
-  onSelect(movie: Movie): void {
-    this.selectedMovie = movie;
-  }
-
-  gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedMovie.id]);
-  }
-
-  gotoNewMovie(): void {
-    this.router.navigate(['/new']);
   }
 
 

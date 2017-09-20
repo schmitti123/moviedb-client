@@ -19,10 +19,10 @@
     </md-form-field>
     <input type="hidden" #imageBytes>
 
-    <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
+    <app-input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
       <span class="nofiles">Choose file</span>
       <span class="selected">Files selected</span>
-    </input-file>
+    </app-input-file>
 
 
     <div [ngStyle]="{'width': elemWidth, 'height': elemHeight}" class="dropzone" appNgFileDropzone (fileDrop)="fileDrop($event)" id="dropzone" #dropzone>
