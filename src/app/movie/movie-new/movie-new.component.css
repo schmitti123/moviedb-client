@@ -1,0 +1,6 @@
+div.dropzone {
+  border: dashed gainsboro 5px;
+  background: ghostwhite;
+  height: 200px;
+  width: 200px;
+}

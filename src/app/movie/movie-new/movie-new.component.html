@@ -1,0 +1,38 @@
+<md-expansion-panel>
+
+  <md-expansion-panel-header>
+    <md-panel-title>
+      New Movie
+    </md-panel-title>
+    <md-panel-description>
+      Capture a new movie
+    </md-panel-description>
+  </md-expansion-panel-header>
+
+  <form>
+    <md-form-field>
+      <input mdInput placeholder="Title" #movieTitle>
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput placeholder="Genre" #movieGenre>
+    </md-form-field>
+    <input type="hidden" #imageBytes>
+
+    <input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
+      <span class="nofiles">Choose file</span>
+      <span class="selected">Files selected</span>
+    </input-file>
+
+
+    <div [ngStyle]="{'width': elemWidth, 'height': elemHeight}" class="dropzone" appNgFileDropzone (fileDrop)="fileDrop($event)" id="dropzone" #dropzone>
+      <p *ngIf="!this.imageData">Drop a file</p>
+      <img *ngIf="this.imageData" [src]="this.imageData"/>
+    </div>
+  </form>
+
+  <button md-raised-button
+          (click)="add(movieTitle.value, movieGenre.value ); movieTitle.value=''; movieGenre.value=''; imageBytes.value=''">
+    Add
+  </button>
+</md-expansion-panel>

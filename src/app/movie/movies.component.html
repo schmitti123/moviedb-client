@@ -1,0 +1,59 @@
+<!-- <button md-raised-button (click)="gotoNewMovie()">New Movie</button> -->
+
+<app-movie-new></app-movie-new>
+
+<md-form-field floatPlaceholder="never">
+  <input mdInput #filter placeholder="Filter Movies">
+</md-form-field>
+
+<md-table #table [dataSource]="datasource">
+
+  <ng-container mdColumnDef="title">
+    <md-header-cell *mdHeaderCellDef> Title</md-header-cell>
+    <md-cell *mdCellDef="let movie"> {{movie.title}}</md-cell>
+  </ng-container>
+
+
+  <ng-container mdColumnDef="genre">
+    <md-header-cell *mdHeaderCellDef> Genre</md-header-cell>
+    <md-cell *mdCellDef="let movie"> {{movie.genre}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="delete">
+    <md-header-cell *mdHeaderCellDef> Delete</md-header-cell>
+    <md-cell *mdCellDef="let movie">
+      <button md-mini-fab
+              (click)="delete(movie); $event.stopPropagation()">x
+      </button>
+    </md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="details">
+    <md-header-cell *mdHeaderCellDef> Details</md-header-cell>
+    <md-cell *mdCellDef="let movie">
+      <button md-mini-fab
+              (click)="details(movie); $event.stopPropagation()">x
+      </button>
+    </md-cell>
+  </ng-container>
+
+  <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+  <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+</md-table>
+
+<!--<ul class="movies">-->
+  <!--<li *ngFor="let movie of movies" (click)="onSelect(movie)"-->
+      <!--[class.selected]="movie === selectedMovie">-->
+    <!--<span class="badge">{{movie.title}}</span>-->
+    <!--<span>{{movie.genre}}</span>-->
+    <!--<button md-mini-fab class="delete"-->
+            <!--(click)="delete(movie); $event.stopPropagation()">x-->
+    <!--</button>-->
+  <!--</li>-->
+<!--</ul>-->
+<!--<div *ngIf="selectedMovie">-->
+  <!--<h2>-->
+    <!--{{selectedMovie.title | uppercase}} is my Movie-->
+  <!--</h2>-->
+  <!--<button md-raised-button (click)="gotoDetail()">View Details</button>-->
+<!--</div>-->
