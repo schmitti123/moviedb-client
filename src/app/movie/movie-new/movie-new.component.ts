@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Movie} from '../movie';
 import {MovieService} from '../movie.service';
 import {MoviesChangedService} from '../movie-changed-service/movie-changed.service';
-import EXIF from 'exif-js';
 import {ImageHandler} from '../../../common/imagehandler';
+import {MovieEditorComponent} from '../movie-editor/movie-editor.component';
 
 @Component({
   selector: 'app-movie-new',
@@ -13,29 +13,27 @@ import {ImageHandler} from '../../../common/imagehandler';
 export class MovieNewComponent implements OnInit {
 
   constructor(private movieService: MovieService,
-              private moviesChangedService: MoviesChangedService) {
+              private moviesChangedService: MoviesChangedService
+              ) {
   }
+
+  @Input('movieEditor')
+  movieEditor: MovieEditorComponent;
 
   MAX_WIDTH = 300;
   MAX_HEIGHT = 300;
 
   imageData: string;
-  existImage = false;
 
   elemWidth = '200px';
   elemHeight = '200px';
 
 
-  add(title: string, genre: string): void {
-    title = title.trim();
-    if (!title) {
+  add(movie: Movie): void {
+    movie.title = movie.title.trim();
+    if (!movie.title) {
       return;
     }
-
-    const movie: Movie = new Movie();
-    movie.title = title;
-    movie.genre = genre;
-    movie.imageData = this.imageData;
 
 
     this.movieService.create(movie)
@@ -60,5 +58,7 @@ export class MovieNewComponent implements OnInit {
       this.elemWidth = elemWidth;
     });
   }
+
+
 
 }

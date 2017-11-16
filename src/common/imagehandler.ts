@@ -81,16 +81,9 @@ export class ImageHandler {
   }
 
   private calcImageDimension(maxHeight: number, maxWidth: number, height: number, width: number): ImageDimension {
-    if (width > height) {
-      if (width > maxWidth) {
-        height *= maxHeight / width;
-        width = maxWidth;
-      }
-    } else {
-      if (height > maxHeight) {
-        width *= maxWidth / height;
-        height = maxHeight;
-      }
+    if (width > maxWidth) {
+      height *= maxHeight / width;
+      width = maxWidth;
     }
 
     return new ImageDimension(height, width);

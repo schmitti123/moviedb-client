@@ -1,4 +1,3 @@
-///<reference path="../../../node_modules/@angular/core/src/metadata/directives.d.ts"/>
 import {Component, ElementRef, ViewChild, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
@@ -28,11 +27,9 @@ export class MoviesComponent implements OnInit {
   filter: ElementRef;
 
   constructor(private movieService: MovieService,
-              private router: Router, private moviesChangedService: MoviesChangedService) {
-
-
+              private router: Router,
+              private moviesChangedService: MoviesChangedService) {
     moviesChangedService.movieChangedHandler().subscribe(movie => this.add(movie));
-
   }
 
   getMovies(): void {
@@ -43,17 +40,12 @@ export class MoviesComponent implements OnInit {
 
   add(movie: Movie): void {
     this.movies.push(movie);
-
-
   }
 
   delete(movie: Movie): void {
     this.movieService
       .delete(movie.id)
       .then(() => {
-        console.log(this.movies);
-        console.log(movie);
-
         let index = 0;
         for (const m of this.movies) {
           if (movie.id === m.id) {
@@ -61,7 +53,6 @@ export class MoviesComponent implements OnInit {
           }
           index++;
         }
-        // const index = this.movies.indexOf(movie);
         this.movies.splice(index, 1);
 
       });

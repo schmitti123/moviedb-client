@@ -19,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {InputFileComponent} from '../common/input-file/input-file.component';
 import {MyHeaderComponent} from '../common/my-header/my-header.component';
 import {NgFileDropzoneDirective} from './ng-file-dropzone.directive';
+import { MovieEditorComponent } from './movie/movie-editor/movie-editor.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {NgFileDropzoneDirective} from './ng-file-dropzone.directive';
     MovieNewComponent,
     InputFileComponent,
     MyHeaderComponent,
-    NgFileDropzoneDirective
+    NgFileDropzoneDirective,
+    MovieEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,7 @@ import {NgFileDropzoneDirective} from './ng-file-dropzone.directive';
     MdCardModule,
     BrowserAnimationsModule,
   ],
-  providers: [MovieService, MoviesChangedService],
+  providers: [MovieService, MoviesChangedService, MovieEditorComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
