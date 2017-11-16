@@ -1,0 +1,27 @@
+<form>
+  <md-form-field>
+    <input mdInput placeholder="Title" [(ngModel)]="movie.title" name="title">
+  </md-form-field>
+
+  <md-form-field>
+    <input mdInput placeholder="Genre" [(ngModel)]="movie.genre" name="genre">
+  </md-form-field>
+
+  <md-form-field>
+    <input mdInput placeholder="Medium" [(ngModel)]="movie.medium" name="medium">
+  </md-form-field>
+
+  <input type="hidden" #imageBytes>
+
+  <app-input-file (onFileSelect)="onFileSelect($event)" [accept]="'image/*'">
+    <span class="nofiles">Choose file</span>
+    <span class="selected">Files selected</span>
+  </app-input-file>
+
+
+  <div [ngStyle]="{'width': elemWidth, 'height': elemHeight}" class="dropzone" appNgFileDropzone (fileDrop)="fileDrop($event)" id="dropzone" #dropzone>
+    <p *ngIf="!this.imageData">Drop a file</p>
+    <img *ngIf="this.imageData" [src]="this.imageData"/>
+  </div>
+</form>
+
