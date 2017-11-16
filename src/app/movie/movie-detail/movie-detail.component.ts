@@ -17,7 +17,8 @@ export class MovieDetailComponent implements OnInit {
 
 
   constructor(private movieService: MovieService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private router: Router
   ) {  }
 
   movie: Movie;
@@ -26,6 +27,10 @@ export class MovieDetailComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.movieService.getMovie(params.get('id')))
       .subscribe(movie => this.movie = movie);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 
 }

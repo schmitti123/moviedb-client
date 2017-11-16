@@ -1,1 +1,6 @@
-<app-movie-editor movie={{movie}}></app-movie-editor>
+<app-movie-editor *ngIf="this.movie" [movie]=this.movie></app-movie-editor>
+
+<button md-raised-button
+        (click)="goBack()">
+  Back
+</button>

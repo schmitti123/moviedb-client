@@ -11,9 +11,8 @@ export class MovieEditorComponent implements OnInit {
 
   constructor() { }
 
-  public imageData: string;
   @Input()
-  public movie: Movie = new Movie;
+  public movie: Movie = new Movie();
 
   MAX_WIDTH = 300;
   MAX_HEIGHT = 300;
@@ -23,10 +22,19 @@ export class MovieEditorComponent implements OnInit {
   elemHeight = '200px';
 
   ngOnInit() {
+    console.log(this.movie);
+    const img = document.createElement('img');
+    img.src = this.movie.imageData;
+    img.onload = () => {
+      this.elemWidth = img.width + 'px';
+      this.elemHeight = img.height + 'px';
+    };
+
   }
 
   onFileSelect(event: FileList) {
     this.fileDrop(event.item(0));
+
 
   }
 
@@ -34,7 +42,6 @@ export class MovieEditorComponent implements OnInit {
     const imageHandler = new ImageHandler();
     imageHandler.fileDrop(file, this.MAX_WIDTH, this.MAX_HEIGHT, (imageData, elemWidth, elemHeight) => {
       this.movie.imageData = imageData;
-      this.imageData = imageData;
       this.elemHeight = elemHeight;
       this.elemWidth = elemWidth;
     });

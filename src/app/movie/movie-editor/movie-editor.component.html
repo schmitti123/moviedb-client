@@ -1,14 +1,14 @@
 <form>
   <md-form-field>
-    <input mdInput placeholder="Title" [(ngModel)]="movie.title" name="title">
+    <input mdInput placeholder="Title" [(ngModel)]=this.movie.title name="title">
   </md-form-field>
 
   <md-form-field>
-    <input mdInput placeholder="Genre" [(ngModel)]="movie.genre" name="genre">
+    <input mdInput placeholder="Genre" [(ngModel)]=this.movie.genre name="genre">
   </md-form-field>
 
   <md-form-field>
-    <input mdInput placeholder="Medium" [(ngModel)]="movie.medium" name="medium">
+    <input mdInput placeholder="Medium" [(ngModel)]=this.movie.medium name="medium">
   </md-form-field>
 
   <input type="hidden" #imageBytes>
@@ -20,8 +20,8 @@
 
 
   <div [ngStyle]="{'width': elemWidth, 'height': elemHeight}" class="dropzone" appNgFileDropzone (fileDrop)="fileDrop($event)" id="dropzone" #dropzone>
-    <p *ngIf="!this.imageData">Drop a file</p>
-    <img *ngIf="this.imageData" [src]="this.imageData"/>
+    <p *ngIf="!this.movie.imageData">Drop a file</p>
+    <img *ngIf="this.movie.imageData" [src]="this.movie.imageData"/>
   </div>
 </form>
 
