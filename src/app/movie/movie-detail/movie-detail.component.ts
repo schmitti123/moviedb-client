@@ -33,4 +33,8 @@ export class MovieDetailComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
+  save(): void {
+    this.movieService.update(this.movie);
+  }
+
 }
